@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dev.ilya_anna.announcement_service.dto.CityDto;
-import dev.ilya_anna.announcement_service.entities.City;
 import dev.ilya_anna.announcement_service.repositories.CityRepository;
 
 @Service

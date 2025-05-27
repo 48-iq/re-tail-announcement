@@ -1,9 +1,9 @@
 package dev.ilya_anna.announcement_service.services;
 
-import dev.ilya_anna.announcement_service.entities.User;
+import dev.ilya_anna.announcement_service.events.UserCreateEvent;
+import dev.ilya_anna.announcement_service.events.UserUpdateEvent;
 
 public interface UserService {
-  void create(User user);
-  void update(String id, User user);
-
+  void create(UserCreateEvent uce);
+  void update(UserUpdateEvent upe);
 }
