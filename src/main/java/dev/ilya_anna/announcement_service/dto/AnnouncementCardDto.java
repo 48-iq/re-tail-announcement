@@ -18,5 +18,7 @@ public class AnnouncementCardDto {
   private String subcategoryName;
   private String categoryName;
   private String cityName;
+  private String categoryId;
+  private String subcategoryId;
   private String cityId;
 }

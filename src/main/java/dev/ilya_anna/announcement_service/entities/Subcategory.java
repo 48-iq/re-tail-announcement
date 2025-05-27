@@ -1,5 +1,8 @@
 package dev.ilya_anna.announcement_service.entities;
 
+import org.checkerframework.checker.units.qual.C;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
@@ -21,6 +24,9 @@ import lombok.Setter;
 @Setter
 public class Subcategory {
   @Id
+  private String id;
+  
+  @Column(unique = true)
   private String name;
 
   @ManyToOne(fetch = FetchType.EAGER)

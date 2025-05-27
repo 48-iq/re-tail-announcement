@@ -1,11 +1,14 @@
 package dev.ilya_anna.announcement_service.entities;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -25,22 +28,39 @@ import lombok.Setter;
 public class Announcement {
   @Id
   private String id;
+
   private String title;
+
   private String description;
+
   private String address;
+
   private Double price;
+
   private ZonedDateTime createdAt;
+
   @ManyToOne
   @JoinColumn(name = "creator_id")
   private User creator;
+
   @OneToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "preview_image_id")
   private Image previewImage;
+
+  @ManyToMany(mappedBy = "id")
+  @JoinTable(name = "announcements_images",
+    joinColumns = @JoinColumn(name = "announcement_id"),
+    inverseJoinColumns = @JoinColumn(name = "image_id"))
+  private List<Image> images;
+
   private Boolean isActive;
+
   private Integer count;
+
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "subcategory_id")
   private Subcategory subcategory;
+  
   @ManyToOne
   @JoinColumn(name = "city_name")
   private City city;

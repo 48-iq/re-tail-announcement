@@ -19,5 +19,4 @@ import lombok.Setter;
 public class Image {
   @Id
   private String id;
-  private String path;
 }

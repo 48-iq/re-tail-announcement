@@ -1,5 +1,7 @@
 package dev.ilya_anna.announcement_service.dto;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +23,10 @@ public class AnnouncementDto {
   private Boolean isActive;
   private Integer count;
   private String subcategoryId;
+  private String subcategoryName;
+  private String categoryName;
   private String categoryId;
+  private String cityId;
   private String cityName;
+  private List<String> imageIds;
 }

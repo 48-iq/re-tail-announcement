@@ -2,6 +2,7 @@ package dev.ilya_anna.announcement_service.services;
 
 import dev.ilya_anna.announcement_service.dto.AnnouncementCreateDto;
 import dev.ilya_anna.announcement_service.dto.AnnouncementDto;
+import dev.ilya_anna.announcement_service.dto.AnnouncementUpdateDto;
 import dev.ilya_anna.announcement_service.exceptions.AnnouncementAlreadyExistsException;
 import jakarta.validation.Valid;
 import dev.ilya_anna.announcement_service.entities.Announcement;
@@ -15,14 +16,14 @@ public interface AnnouncementService {
    * @see Announcement
    * @throws AnnouncementAlreadyExistsException
    */
-  AnnouncementDto create(@Valid AnnouncementCreateDto announcementCreateDto) throws AnnouncementAlreadyExistsException;
+  AnnouncementDto createAnnouncement(@Valid AnnouncementCreateDto announcementCreateDto) throws AnnouncementAlreadyExistsException;
 
   /**
    * delete announcement from storage
    * @param id
    * @see Announcement
    */
-  void delete(String id);
+  void deleteAnnouncementById(String id);
 
   /**
    * update announcement in storage
@@ -31,7 +32,15 @@ public interface AnnouncementService {
    * @return updated announcement
    * @see Announcement
    */
-  AnnouncementDto update(String id, @Valid AnnouncementDto announcementDto);
+  AnnouncementDto updateAnnouncementById(String id, @Valid AnnouncementUpdateDto announcementDto);
+
+  /**
+   * get announcement from storage
+   * @param id
+   * @return announcement
+   * @see Announcement
+   */
+  AnnouncementDto getAnnouncementById(String id);
 
   /**
    * count announcements by user in storage

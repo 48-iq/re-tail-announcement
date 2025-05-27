@@ -1,5 +1,7 @@
 package dev.ilya_anna.announcement_service.dto;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
@@ -21,5 +23,6 @@ public class AnnouncementCreateDto {
   private Integer count;
   private String subcategoryId;
   private String categoryId;
-  private String cityName;
+  private String cityId;
+  private List<MultipartFile> imageFiles;
 }
