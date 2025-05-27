@@ -18,4 +18,6 @@ public interface AnnouncementRepository extends JpaRepository<Announcement, Stri
       PageRequest pageRequest);
 
   boolean existsByCreatorIdAndTitle(String creatorId, String title);
+
+  Integer countByCreatorId(String creatorId);
 } 

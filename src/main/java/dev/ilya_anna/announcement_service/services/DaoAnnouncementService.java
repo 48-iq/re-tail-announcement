@@ -12,6 +12,7 @@ import dev.ilya_anna.announcement_service.dto.AnnouncementDto;
 import dev.ilya_anna.announcement_service.entities.Announcement;
 import dev.ilya_anna.announcement_service.entities.Image;
 import dev.ilya_anna.announcement_service.exceptions.AnnouncementAlreadyExistsException;
+import dev.ilya_anna.announcement_service.exceptions.AnnouncementNotFoundException;
 import dev.ilya_anna.announcement_service.exceptions.UserNotFoundException;
 import dev.ilya_anna.announcement_service.repositories.AnnouncementRepository;
 import dev.ilya_anna.announcement_service.repositories.UserRepository;
@@ -80,8 +81,7 @@ public class DaoAnnouncementService implements AnnouncementService {
       .isActive(announcement.getIsActive())
       .build();
 
-    return announcementDto;
-    
+    return announcementDto;    
   }
 
   @Override
@@ -96,12 +96,31 @@ public class DaoAnnouncementService implements AnnouncementService {
   @Override
   public AnnouncementDto update(String id, @Valid AnnouncementDto announcementDto) {
     
+    Announcement announcement = announcementRepository.findById(id).orElseThrow(
+      () -> new AnnouncementNotFoundException("Announcement with id " + id + " not found"));
+
+    announcement.setTitle(announcementDto.getTitle());
+    announcement.setDescription(announcementDto.getDescription());
+    announcement.setAddress(announcementDto.getAddress());
+    announcement.setPrice(announcementDto.getPrice());
+    announcement.setIsActive(announcementDto.getIsActive());
+    announcement = announcementRepository.save(announcement);
+    
+    return AnnouncementDto.builder()
+      .id(announcement.getId())
+      .title(announcement.getTitle())
+      .description(announcement.getDescription())
+      .address(announcement.getAddress())
+      .price(announcement.getPrice())
+      .creatorId(announcement.getCreator().getId())
+      .previewImageId(announcement.getPreviewImage().getId())
+      .isActive(announcement.getIsActive())
+      .build();
   }
 
   @Override
   public Integer countAnnouncementsByUser(String userId) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'countAnnouncementsByUser'");
+    return announcementRepository.countByCreatorId(userId);
   }
   
 }
